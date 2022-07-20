@@ -1,9 +1,7 @@
 import React from 'react';
-import type { AppProps } from 'next/app'
 import chroma from 'chroma-js';
-
 import { Options } from '../../Utils/SelectData';
-import Select, { StylesConfig } from 'react-select';
+import Select, { GroupBase, StylesConfig } from 'react-select';
 
 const dot = (color = 'transparent') => ({
   alignItems: 'center',
@@ -57,10 +55,11 @@ const colourStyles: StylesConfig<Options> = {
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
 };
 
-export default ({pageProps}: AppProps) => (
+export default (props: {selectOptions: readonly Options[] }) => (
   <Select
-    defaultValue={pageProps.options[0]}
-    options={pageProps.options}
+    defaultValue={props.selectOptions[0]}
+    options={props.selectOptions}
     styles={colourStyles}
   />
 );
+

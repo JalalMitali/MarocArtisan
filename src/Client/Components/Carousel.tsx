@@ -20,7 +20,7 @@ const Carousel: NextPage = () => {
                         {Constants.carousel}
                       </span>
                       <div className='my-10 text-2xl tablet:text-3xl laptop:text-6xl'>
-                          <Select pageProps={{options: artisanOpenings}} />
+                          <Select selectOptions={artisanOpenings } />
                       </div>
                       <button className='min-w-screen border-4 border-white rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl'>
                         {Constants.startHiring}
