@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Carousel from '../src/Client/Components/Carousel'
-import Download from '../src/Client/Components/Download'
-import Icons from '../src/Client/Components/Icons'
-import Appbar from '../src/Client/Elements/Appbar'
-import Footer from '../src/Client/Elements/Footer'
+import Carousel from '../Client/Components/Carousel'
+import Download from '../Client/Components/Download'
+import Icons from '../Client/Components/Icons'
+import Appbar from '../Client/Components/Appbar'
+import Footer from '../Client/Components/Footer'
 
 const Home: NextPage = () => {
   return (

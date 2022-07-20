@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors')
+var webpack = require('webpack')
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./src/**/**/*.{js,ts,jsx,tsx}",
+    "./Client/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

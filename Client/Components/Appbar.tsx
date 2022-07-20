@@ -6,7 +6,7 @@ const Appbar: NextPage = () => {
   const [activePage, setActive] = useState(0);
   return (
     <div className="min-h-appBar bg-gradient-to-r from-purple-500 to-pink-500">
-      <div className='m-auto flex flex-col tablet:flex-row  tablet:grid tablet:grid-cols-6 tablet:gap-2'>
+      <div className='m-auto flex flex-col tablet:flex-row tablet:grid tablet:grid-cols-6 tablet:gap-2'>
         <div className='content-start text-white text-middle text-center text-bold text-xl my-5 text-3xl tablet:text-4xl tablet:my-5 tablet:mt-15 tablet:col-span-2 tablet:my-auto laptop:col-span-4 laptop:text-5xl laptop:my-8  laptop:align-start laptop:place-content-start laptop:justify-start laptop:text-left laptop:pl-10'>
           MAROC ARTISAN
         </div>

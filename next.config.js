@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-var webpack = require('webpack');
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
