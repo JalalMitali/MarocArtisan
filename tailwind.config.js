@@ -5,6 +5,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./Client/**/*.{js,ts,jsx,tsx}",
+    "./Client/Components/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
