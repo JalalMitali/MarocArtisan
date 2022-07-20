@@ -11,13 +11,13 @@ const Appbar: NextPage = () => {
           MAROC ARTISAN
         </div>
         <div className='flex gap-1 mb-5 flex-col tablet:my-auto tablet:py-3 tablet:grid text-middle text-center text-bold my-0 tablet:col-span-4 tablet:mx-3 laptop:col-span-2 laptop:text-3xl laptop:grid laptop:grid-cols-6 laptop:my-8 laptop:py-0'>
-          <button className={`${activePage == 0 ? 'border-4 border-black text-black bg-white laptop:col-span-2 text-2xl tablet:text-3xl  laptop:max-w-link': "border-4 border-white text-white rounded-lg bg-black laptop:col-span-2 text-2xl tablet:text-3xl laptop:max-w-link"}`}>
+          <button className={`${activePage == 0 ? "border-4 border-black text-black bg-white text-2xl tablet:text-3xl laptop:col-span-2 laptop:max-w-link": "border-4 border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link"}`}>
             {Constants.Hiring}
           </button>
-          <button className={`${activePage == 1 ? 'border-4 border-black text-black bg-white laptop:col-span-2 text-2xl tablet:text-3xl  laptop:max-w-link': "border-4 border-white text-white rounded-lg bg-black laptop:col-span-2 text-2xl tablet:text-3xl laptop:max-w-link"}`}>
+          <button className={`${activePage == 1 ? "border-4 border-black text-black bg-white text-2xl tablet:text-3xl laptop:col-span-2 laptop:max-w-link": "border-4 border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link"}`}>
             {Constants.Artisan}
           </button>
-          <button className={`${activePage == 2 ? 'border-4 border-black text-black bg-white laptop:col-span-2 text-2xl tablet:text-3xl  laptop:max-w-link': "border-4 border-white text-white rounded-lg bg-black laptop:col-span-2 text-2xl tablet:text-3xl laptop:max-w-link"}`}>
+          <button className={`${activePage == 2 ? "border-4 border-black text-black bg-white text-2xl tablet:text-3xl laptop:col-span-2 laptop:max-w-link": "border-4 border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link"}`}>
             {Constants.Support}
           </button>
         </div>
