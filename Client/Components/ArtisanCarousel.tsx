@@ -2,13 +2,12 @@ import type { NextPage } from 'next'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Constants from '../../Utils/Constants'
-import Select from './Select'
-import { artisanOpenings } from '../../Utils/SelectData'
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
-const Carousel: NextPage = () => {
+const ArtisanCarousel: NextPage = () => {
     const options = { delay: 5000 }
     const autoplay = Autoplay(options)
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [autoplay])
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay])
   return (
     <div className='relative'>
       <div ref={emblaRef} className="overflow-hidden">
@@ -17,14 +16,11 @@ const Carousel: NextPage = () => {
                   <div className='m-auto'>
                     <div className='bg-black pb-10 rounded-lg'>
                       <span className='text-white text-bold text-sliderM tablet:text-sliderT laptop:text-sliderL'>
-                        {Constants.carousel}
+                        {Constants.carouselArtisan}
                       </span>
-                      <div className='my-10 text-2xl tablet:text-3xl laptop:text-6xl'>
-                          <Select selectOptions={artisanOpenings } />
-                      </div>
-                      <button className='min-w-screen border-4 border-white bg-rose-500 rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl'>
-                        {Constants.startHiring}
-                      </button>
+                    </div>
+                    <div className='mt-20'>
+                        <ArrowCircleDownIcon sx={{fontSize: 200, color: '#000'}} />
                     </div>
                   </div>
                   </div>
@@ -34,4 +30,4 @@ const Carousel: NextPage = () => {
   )
 }
 
-export default Carousel
+export default ArtisanCarousel

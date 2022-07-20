@@ -2,16 +2,19 @@ const Constants = {
     Hiring: "HIRING",
     Artisan: "ARTISAN",
     Support: "SUPPORT",
-    carousel: "Find Your Preferred Artisans, Compare Prices and Get Work Done in Short Time!",
+    carousel: "Find Your Preferred Artisans, Compare Prices and Get Work Done in Time!",
     startHiring: "START HIRING",
     artisansNumber: '7000 Artisans',
     jobOffersNumber: '2000 Offers Sent',
     estimationsSentNumber: '10000 Estimations',
     hiresNumbers: '1000 Work Done',
     PrivacyPolicy: 'PRIVACY POLICY',
-    AboutUs: 'ABOUT US',
+    AboutUs: 'ABOUT ARTISAN',
     TermsOfService: 'TERMS OF SERVICE',
     GooglePlay: 'GOOGLE PLAY',
-    AppleStore: 'APP STORE'
+    AppleStore: 'APP STORE',
+    clientsNumber: '5000 CLIENTS',
+    hireRate: '75% HIRE RATE',
+    carouselArtisan: 'Become One Of Our Trusted Partners to Get Hired Easily and Earn More',
 }
 export default Constants;
