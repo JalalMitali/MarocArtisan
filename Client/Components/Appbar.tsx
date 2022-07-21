@@ -5,7 +5,6 @@ import ARConstants from '../../Utils/ARConstants'
 import { useRouter } from 'next/router'
 import { languages } from '../../Utils/SelectData'
 import LangSelect from './LangSelect'
-import Link from 'next/Link'
 
 const Appbar: NextPage<{activePage: number}> = (props: {activePage: number}) => {
   let router = useRouter();
