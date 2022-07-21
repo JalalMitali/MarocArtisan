@@ -60,6 +60,6 @@ export default (props: {router: any, langStyles: string, selectOptions: readonly
     styles={colourStyles}
     options={props.selectOptions}
     className={props.langStyles}
-    onChange={(choice: any) => { choice['label'] === "English" ? props.router.push(`/en`, `/`, { locale: 'en'}) : choice['label'] === "Français" ? props.router.push(`/fr`, `/fr`, { locale: 'fr'}) : choice['label'] === "العربية" ? props.router.push(`/ar`, `/ar`, { locale: 'ar'}) : props.router.push(`/en`, `/en`, { locale: 'en'}) }}
+    onChange={(choice: any) => { choice['label'] === "English" ? props.router.push(`/en/${props.router.pathname}`, `/en/${props.router.pathname}`, { locale: 'en'}) : choice['label'] === "Français" ? props.router.push(`/fr/${props.router.pathname}`, `/fr/${props.router.pathname}`, { locale: 'fr'}) : choice['label'] === "العربية" ? props.router.push(`/ar/${props.router.pathname}`, `/ar/${props.router.pathname}`, { locale: 'ar'}) : null}}
   />
 );
