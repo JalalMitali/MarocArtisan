@@ -12,9 +12,9 @@ const Footer: NextPage = () => {
   return (
     <div className='bg-slider1 flex flex-col p-10 min-w-screen min-h-footer gap-4'>
         <div className='tablet:m-auto'>
-            <button className='border-black tablet:pl-0 border-2 bg-rose-700 text-white px-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mx-5 laptop:mx-10'>{constants.PrivacyPolicy}</button>
-            <button className='border-black tablet:pl-0 border-2 bg-rose-700 text-white px-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mx-5 laptop:mx-10'>{constants.AboutUs}</button>
-            <button className='border-black tablet:pl-0 border-2 bg-rose-700 text-white px-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mx-5 laptop:mx-10'>{constants.TermsOfService}</button>
+            <button className='border-black border-2 bg-rose-700 text-white mr-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mr-5 laptop:mr-10'>{constants.PrivacyPolicy}</button>
+            <button className='border-black border-2 bg-rose-700 text-white mr-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mr-5 laptop:mr-10'>{constants.AboutUs}</button>
+            <button className='border-black border-2 bg-rose-700 text-white mr-10 text-center rounded-full text-2xl tablet:text-3xl laptop:text-6xl tablet:mr-5 laptop:mr-10'>{constants.TermsOfService}</button>
         </div>
         
     </div>

@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   let router = useRouter();
   
   return (
-    <div >
+    <div className='overflow-hidden'>
        <Head>
         <title>Maroc Artisan</title>
         <meta name="description" content="Maroc Artisan #1 Site For Hiring Artisans in Morocco." />
