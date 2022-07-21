@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 var webpack = require('webpack')
 module.exports = {
   content: [
@@ -66,6 +67,9 @@ module.exports = {
         'phone': '640px',
         'tablet': '768px',
         'laptop': '1080px',
+      },
+      fontFamily: {
+        'Coffee': ['Love', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         'xs': '.75rem',
