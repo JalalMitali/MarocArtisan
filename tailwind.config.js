@@ -66,7 +66,7 @@ module.exports = {
       screens: {
         'phone': '640px',
         'tablet': '768px',
-        'laptop': '1080px',
+        'laptop': '1720px',
       },
       fontFamily: {
         'Coffee': ['Coffee', ...defaultTheme.fontFamily.sans],
