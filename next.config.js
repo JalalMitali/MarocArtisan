@@ -10,5 +10,24 @@ const nextConfig = {
   });
   return config;
   },
+  i18n: {
+    locales: ['en', 'fr', 'ar'],
+    defaultLocale: 'fr',
+    /* domains: [
+      {
+        domain: 'marocartisan.com/en',
+        defaultLocale: 'en',
+      },
+      {
+        domain: 'marocartisan.com/fr',
+        defaultLocale: 'fr',
+      },
+      {
+        domain: 'marocartisan.com/ar',
+        defaultLocale: 'ar',
+        http: false,
+      },
+    ], */
+  },
 }
 module.exports = nextConfig;

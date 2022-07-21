@@ -11,5 +11,10 @@ export interface Options {
     { value: 'electrican', label: 'Electrican', color: '#5243AA', isFixed: true  },
     { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
   ];
+  export const languages: readonly Options[] = [
+    { value: 'en', label: 'English', color: '#00B8D9', isFixed: true },
+    { value: 'fr', label: 'Français', color: '#5243AA', isFixed: true  },
+    { value: 'ar', label: 'العربية', color: '#FF5630', isFixed: true },
+  ];
 
   

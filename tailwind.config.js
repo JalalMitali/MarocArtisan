@@ -69,7 +69,10 @@ module.exports = {
         'laptop': '1080px',
       },
       fontFamily: {
-        'Coffee': ['Love', ...defaultTheme.fontFamily.sans],
+        'Coffee': ['Coffee', ...defaultTheme.fontFamily.sans],
+        'Dreams': ['Dreams', ...defaultTheme.fontFamily.sans],
+        'arFont': ['arFont', ...defaultTheme.fontFamily.sans],
+        'Roboto': ['Roboto', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         'xs': '.75rem',

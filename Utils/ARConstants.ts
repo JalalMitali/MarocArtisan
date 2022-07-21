@@ -1,0 +1,20 @@
+const ARConstants = {
+    Hiring: "توظيف",
+    Artisan: "الحرفيين",
+    Support: "الدعم",
+    carousel: "ابحث عن الحرفيين المفضلين لديك ، قارن الأسعار وانجز العمل في الوقت المناسب!",
+    startHiring: "ابدأ التوظيف",
+    artisansNumber: '7000 حرفي',
+    jobOffersNumber: '2000 عرض',
+    estimationsSentNumber: '10000 تقديرات',
+    hiresNumbers: '1000 عمل تم',
+    PrivacyPolicy: 'سياسة الخصوصية',
+    AboutUs: 'عن أرتيزان',
+    TermsOfService: 'شروط الخدمة',
+    GooglePlay: 'GOOGLE PLAY',
+    AppleStore: 'APP STORE',
+    clientsNumber: '5000 عميل',
+    hireRate: '75٪ معدل تأجير',
+    carouselArtisan: 'كن أحد شركائنا الموثوق بهم للحصول على وظائف بسهولة وكسب المزيد',
+}
+export default ARConstants;
