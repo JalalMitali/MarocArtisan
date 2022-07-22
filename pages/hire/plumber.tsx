@@ -54,7 +54,7 @@ const Plumber: NextPage = () => {
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
-    <div className="">
+    <div className={router.locale === "en" ? "font-Coffee" :  router.locale === "ar" ? "font-arFont" : router.locale === "fr" ? "font-Dreams": "font-Coffee"}>
       <header>
       <Appbar activePage={0}/>
       </header>
