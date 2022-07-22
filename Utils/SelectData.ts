@@ -6,6 +6,7 @@ export interface Options {
     readonly isDisabled?: boolean;
   }
 
+  // fix failure
   export const ArtisanOpenings: readonly Options[] = [
     { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
     { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
