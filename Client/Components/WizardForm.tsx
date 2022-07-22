@@ -6,7 +6,7 @@ import { jobType } from '../../Utils/SelectData'
 import FormSelect from "./FormSelect";
 import { styles } from "./FormStyles";
 import Select from 'react-select'
-import { artisanOpenings } from '../../Utils/SelectData'
+import { ArtisanOpenings } from '../../Utils/SelectData'
 
 type FormValues = {
   JobType: string;
@@ -20,7 +20,7 @@ function InputSelect(props: UseControllerProps<FormValues>) {
   } = useController(props);
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} styles={styles} options={artisanOpenings} />
+      <Select onChange={onChange} onBlur={onBlur} styles={styles} options={ArtisanOpenings} />
     </div>
   );
 }
