@@ -1,8 +1,10 @@
 import React from 'react';
 import chroma from 'chroma-js';
 import { Options } from '../../Utils/SelectData';
-import Select, { GroupBase, StylesConfig } from 'react-select';
-
+import  { StylesConfig } from 'react-select';
+import dynamic from 'next/dynamic';
+const Select = dynamic(() =>
+  import("react-select"), { ssr: false });
 const dot = (color = 'transparent') => ({
   alignItems: 'center',
   display: 'flex',
@@ -55,11 +57,12 @@ const colourStyles: StylesConfig<Options> = {
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
 };
 
-export default (props: {selectOptions: readonly Options[] }) => (
+export default (props: {styles: any, selectOptions: readonly Options[] }) => (
   <Select
+    instanceId="select"
     defaultValue={props.selectOptions[0]}
     options={props.selectOptions}
-    styles={colourStyles}
+    styles={props.styles}
   />
 );
 

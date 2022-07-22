@@ -5,6 +5,7 @@ import ARConstants from '../../Utils/ARConstants'
 import { useRouter } from 'next/router'
 import { languages } from '../../Utils/SelectData'
 import LangSelect from './LangSelect'
+import { styles } from './FormStyles'
 
 const Appbar: NextPage<{activePage: number}> = (props: {activePage: number}) => {
   let router = useRouter();
@@ -23,7 +24,7 @@ const Appbar: NextPage<{activePage: number}> = (props: {activePage: number}) => 
           <button onClick={() => router.push(`/artisan`, undefined, { shallow: true })} className={`${props.activePage == 1 ? "border-4 border-black text-black bg-white text-2xl tablet:text-3xl laptop:col-span-2 laptop:max-w-link": "border-4 border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link"}`}>
             {constants.Artisan}
           </button>
-          <LangSelect router={router} selectOptions={languages} langStyles="border-4 font-Roboto border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link" />
+          <LangSelect styles={styles} router={router} selectOptions={languages} langStyles="border-4 font-Roboto border-white text-white rounded-lg bg-black tablet:text-3xl laptop:col-span-2 text-2xl laptop:max-w-link" />
         </div>
       </div>
     </div>
