@@ -47,7 +47,7 @@ const Carousel: NextPage = () => {
     mode: "onChange"
   });
   let router = useRouter();
-  router.locale == "en" ? setAll(Constants, ArtisanOpenings): router.locale == "fr" ? setAll(FRConstants, ArtisanOpeningsFR) : router.locale == "ar" ? setAll(ARConstants, ArtisanOpeningsAR) : setAll(Constants, ArtisanOpenings);
+  router.locale == "en" ? setAll(Constants, ArtisanOpenings): router.locale == "fr" ? setAll(FRConstants, ArtisanOpeningsFR) : router.locale == "ar" ? setAll(ARConstants, ArtisanOpeningsAR) : setAll(ARConstants, ArtisanOpeningsAR);
     const options = { delay: 5000 }
     const autoplay = Autoplay(options)
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [autoplay])
