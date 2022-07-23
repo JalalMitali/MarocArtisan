@@ -6,7 +6,6 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./Client/**/*.{js,ts,jsx,tsx}",
-    "./Client/Components/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -18,8 +17,8 @@ module.exports = {
         gray: colors.gray,
         red: colors.red,
         green: colors.green,
-        purple: colors.purple,
         rose: colors.rose,
+        purple: colors.purple,
         emerald: colors.emerald,
         indigo: colors.indigo,
         yellow: colors.yellow,

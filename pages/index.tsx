@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Main from './Main'
+import Main from '../Client/Components/Main'
 import { useRouter } from 'next/router'
 import { createContext } from 'react';
 import { useState } from 'react';

@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import Carousel from '../Client/Components/Carousel'
-import Download from '../Client/Components/Download'
-import Icons from '../Client/Components/Icons'
-import Appbar from '../Client/Components/Appbar'
-import Footer from '../Client/Components/Footer'
+import Carousel from './Carousel'
+import Download from './Download'
+import Icons from './Icons'
+import Appbar from './Appbar'
+import Footer from './Footer'
 
 const Main: NextPage = () => {
   return (

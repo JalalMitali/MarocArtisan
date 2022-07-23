@@ -11,7 +11,7 @@ const ArtisanCarousel: NextPage = () => {
   return (
     <div className='relative'>
       <div className="overflow-hidden bg-slider2">
-              <div className='flex text-center'>
+              <div className='flex flex-col text-center'>
                   <div className='relative flex min-w-screen min-h-sliderMobile min-h-sliderTablet laptop:min-h-slider bg-contain bg-cover bg-center bg-no-repeat object-scale-down'>
                   <div className='m-auto'>
                     <div className='bg-black pb-10 rounded-lg'>
@@ -20,9 +20,10 @@ const ArtisanCarousel: NextPage = () => {
                       </span>
                     </div>
                     <div className='mt-20'>
-                        <MdArrowCircleDown className='text-8xl tablet:text-9xl' />
+                        <MdArrowCircleDown className='text-9xl tablet:text-9xl' />
                     </div>
                   </div>
+                  
                   </div>
               </div>
       </div>
