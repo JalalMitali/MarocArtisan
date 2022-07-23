@@ -2,7 +2,7 @@ const FRConstants = {
     Hiring: "EMBAUCHE",
     Artisan: "ARTISAN",
     Support: "SUPPORT",
-    carousel: "Trouvez vos artisans préférés, comparez les prix et faites le travail à temps !",
+    carousel: "Trouvez vos artisans préférés, comparez les prix et obtenir votre travail à temps!",
     startHiring: "COMMENCEZ À EMBAUCHE",
     artisansNumber: '7000 Artisans',
     jobOffersNumber: '2000 Offres Envoyées',
@@ -16,6 +16,8 @@ const FRConstants = {
     clientsNumber: '5000 CLIENTS',
     hireRate: "75% DE TAUX D'EMBAUCHE",
     city: "Ville",
+    district: "Cartier",
+    getQuote: "Obtenir Devis",
     carouselArtisan: "Devenez l'un de nos partenaires de confiance pour être embauché facilement et gagner plus",
 }
 export default FRConstants;

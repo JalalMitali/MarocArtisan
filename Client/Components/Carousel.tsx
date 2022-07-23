@@ -72,14 +72,14 @@ const Carousel: NextPage = () => {
                   <div className='relative flex min-w-screen min-h-sliderMobile min-h-sliderTablet laptop:min-h-slider bg-contain bg-cover bg-center bg-no-repeat object-scale-down'>
                   <div className='m-auto'>
                     <div className='bg-black pb-10 rounded-lg'>
-                      <span className='text-white text-bold text-sliderM tablet:text-sliderT laptop:text-sliderL'>
+                      <span className={`${router.locale == "fr" ?'text-white text-bold text-sliderFR tablet:text-sliderT laptop:text-sliderL' : "text-white text-bold text-sliderM tablet:text-sliderT laptop:text-sliderL" }`}>
                         {constants.carousel}
                       </span>
                       <form onSubmit={handleSubmit(onSubmit) }>
                         <div className='my-10 text-2xl tablet:text-3xl laptop:text-6xl'>
                         <InputSelect control={control} name="JobType" rules={{ required: true }} />
                         </div>
-                        <input value={constants.startHiring} type="submit" className='bg-rose-500  min-w-screen border-4 border-white rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
+                        <input value={constants.getQuote} type="submit" className='bg-rose-500  min-w-screen border-4 border-white rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
                       </form>
                     </div>
                   </div>

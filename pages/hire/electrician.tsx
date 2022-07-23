@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Select = dynamic(() =>
   import("react-select"), { ssr: false });
  
-import { VilleSelect, VilleSelectAR, VilleSelectFR } from '../../Utils/SelectData'
+import { CitySelect, CitySelectAR, CitySelectFR } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
@@ -21,14 +21,14 @@ type FormValues = {
   JobType: string;
 };
 var constants: typeof Constants;
-var villeSelect: typeof VilleSelect;
+var citySelect: typeof CitySelect;
 
-const setAll = (iconstants: typeof Constants, artisans: typeof VilleSelect) => {
+const setAll = (iconstants: typeof Constants, artisans: typeof CitySelect) => {
   constants = iconstants;
-  villeSelect = artisans;
+  citySelect = artisans;
 }
 
-function MyVilleSelect(props: UseControllerProps<FormValues>) {
+function MyCitySelect(props: UseControllerProps<FormValues>) {
   const {
     field: { onChange, onBlur, name, value, ref },
     fieldState: { invalid, isTouched, isDirty },
@@ -36,7 +36,7 @@ function MyVilleSelect(props: UseControllerProps<FormValues>) {
   } = useController(props);
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} placeholder={constants.city} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={villeSelect} />
+      <Select onChange={onChange} onBlur={onBlur} placeholder={constants.city} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={citySelect} />
     </div>
   );
 }
@@ -54,7 +54,7 @@ const Electrician: NextPage = () => {
     mode: "onChange"
   });
   let router = useRouter();
-  router.locale == "en" ? setAll(Constants, VilleSelect): router.locale == "fr" ? setAll(FRConstants, VilleSelectFR) : router.locale == "ar" ? setAll(ARConstants, VilleSelectAR) : setAll(Constants, VilleSelect);
+  router.locale == "en" ? setAll(Constants, CitySelect): router.locale == "fr" ? setAll(FRConstants, CitySelectFR) : router.locale == "ar" ? setAll(ARConstants, CitySelectAR) : setAll(Constants, CitySelect);
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
@@ -65,7 +65,7 @@ const Electrician: NextPage = () => {
       <main className='bg-slider2 flex flex-col min-h-screen min-w-screen'>
       <form onSubmit={handleSubmit(onSubmit) } className="m-auto ">
         <div className='text-2xl tablet:text-3xl laptop:text-6xl'>
-          <MyVilleSelect control={control} name="JobType" rules={{ required: true }} />
+          <MyCitySelect control={control} name="JobType" rules={{ required: true }} />
         </div>
         <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
       </form>

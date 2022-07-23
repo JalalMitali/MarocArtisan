@@ -27,7 +27,7 @@ export interface Options {
     { value: 'carpenter', label: 'نجار', color: '#FF5630', isFixed: true },
   ];
 
-  export const VilleSelect: readonly Options[] = [
+  export const CitySelect: readonly Options[] = [
     { value: 'casablanca', label: 'Casablanca', color: '#5243AA', isFixed: true  },
     {value: 'fez', label: 'Fez', color: '#00B8D9', isFixed: true },
     { value: 'tanger', label: 'Tanger', color: '#FF5630', isFixed: true },
@@ -46,7 +46,7 @@ export interface Options {
   ];
 
 
-  export const VilleSelectFR: readonly Options[] = [
+  export const CitySelectFR: readonly Options[] = [
     { value: 'casablanca', label: 'Casablanca', color: '#5243AA', isFixed: true  },
     {value: 'fez', label: 'Fès', color: '#00B8D9', isFixed: true },
     { value: 'tanger', label: 'Tangier', color: '#FF5630', isFixed: true },
@@ -65,7 +65,7 @@ export interface Options {
   ];
 
 
-  export const VilleSelectAR: readonly Options[] = [
+  export const CitySelectAR: readonly Options[] = [
     { value: 'casablanca', label: 'الدار البيضاء', color: '#5243AA', isFixed: true  },
     {value: 'fez', label: 'فاس', color: '#00B8D9', isFixed: true },
     { value: 'tanger', label: 'طنجة', color: '#FF5630', isFixed: true },
@@ -83,6 +83,22 @@ export interface Options {
     { value: 'eljadida', label: 'الجديدة', color: '#FF5630', isFixed: true },
   ];
 
+  export const CasablancaDistrictSelectEN: readonly Options[] = [
+    { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+  export const CasablancaDistrictSelectFR: readonly Options[] = [
+    { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+  export const CasablancaDistrictSelectAR: readonly Options[] = [
+    { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+
   export const jobType: readonly Options[] = [
     { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
     { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
@@ -93,5 +109,4 @@ export interface Options {
     { value: 'fr', label: 'Français', color: '#5243AA', isFixed: true  },
     { value: 'ar', label: 'العربية', color: '#FF5630', isFixed: true },
   ];
-
   

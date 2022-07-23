@@ -90,6 +90,7 @@ module.exports = {
         'slider': '7.5rem',
         'sliderL': '5rem',
         'sliderM': '2rem',
+        'sliderFR': '1.5rem',
         'sliderT': '3.5rem',
       },
       backgroundImage: {
