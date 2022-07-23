@@ -9,7 +9,7 @@ export default (props: { styles: any, change: any, langStyles: string, selectOpt
   <Select
     id='select-form'
     instanceId="select-form"
-    defaultValue={props.selectOptions[0]}
+    defaultValue="Select"
     styles={props.styles}
     options={props.selectOptions}
     onChange={props.change} />

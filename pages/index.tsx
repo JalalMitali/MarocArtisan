@@ -13,6 +13,7 @@ const Home: NextPage = () => {
     <div className='overflow-hidden'>
        <Head>
         <title>Maroc Artisan</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="Maroc Artisan #1 Site For Hiring Artisans in Morocco." />
         <link rel="icon" href="/favicon.ico" />
       </Head>

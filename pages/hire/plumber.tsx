@@ -3,7 +3,10 @@ import Appbar from '../../Client/Components/Appbar'
 import Footer from '../../Client/Components/Footer'
 import * as React from "react";
 import { useForm, useController, UseControllerProps } from "react-hook-form";
-import Select from 'react-select'
+import dynamic from "next/dynamic";
+const Select = dynamic(() =>
+  import("react-select"), { ssr: false });
+ 
 import { ArtisanOpenings, ArtisanOpeningsAR, ArtisanOpeningsFR } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'

@@ -1,64 +1,29 @@
 import type { NextPage } from 'next'
-import GroupWorkIcon from '@mui/icons-material/GroupWork'
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
-import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import PaidIcon from '@mui/icons-material/Paid'
+import { MdGroupWork } from "react-icons/md";
+import { MdLocalOffer } from "react-icons/md";
+import { MdBusinessCenter } from "react-icons/md";
+import { MdPaid } from "react-icons/md";
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
 import { useRouter } from 'next/router'
-import { useMediaQuery } from 'react-responsive'
 
 const Icons: NextPage = () => {
-  const Desktop = ({ children }: any) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 })
-    return isDesktop ? children : null
-  }
-  const Tablet = ({ children }: any) => {
-    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 })
-    return isTablet ? children : null
-  }
-  const Mobile = ({ children }: any) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 })
-    return isMobile ? children : null
-  }
-  const Default = ({ children}: any) => {
-    const isNotMobile = useMediaQuery({ minWidth: 768 })
-    return isNotMobile ? children : null
-  }
-
   let router = useRouter();
   var constants;
   router.locale == "en" ? constants = Constants : router.locale == "fr" ? constants = FRConstants : router.locale == "ar" ? constants = ARConstants : constants = Constants;
-  const size = 150;
   return (
     <div className={`${router.locale == "en" ? "text-3xl text-center tablet:text-4xl laptop:text-6xl bg-slider2 flex flex-col gap-2 p-10" : router.locale == "fr" ? "text-2xl text-center tablet:text-2xl laptop:text-5xl bg-slider2 flex flex-col gap-2 p-10" : router.locale == "ar" ? "text-3xl text-center tablet:text-3xl laptop:text-5xl bg-slider2 flex flex-col gap-2 p-10" : "text-3xl text-center tablet:text-3xl laptop:text-5xl bg-slider2 flex flex-col gap-2 p-10" }`}>
         <div className='flex flex-col tablet:flex-row gap-2'>
           <div className='relative border-4 border-rose-500  min-h-icon max-h-icon  bg-white flex flex-row  text-black flex-row min-w-iconM tablet:min-w-iconT laptop:min-w-iconL   place-content-center align-center items-center justify-center'>
           <div className='mx-10 absolute left-0'>
-            <Desktop>
-              <GroupWorkIcon sx={{ fontSize: 150, color: 'black'}} />
-            </Desktop>
-            <Tablet>
-              <GroupWorkIcon sx={{ fontSize: 125, color: 'black'}} />
-            </Tablet>
-            <Mobile>
-              <GroupWorkIcon sx={{ fontSize: 100, color: 'black'}} />
-            </Mobile>
+              <MdGroupWork  className='text-7xl tablet:text-9xl'/>
           </div>
             <span className='text-black absolute left-36 tablet:left-48 laptop:left-56'>{constants.artisansNumber}</span>
           </div>
           <div className='relative border-4 border-rose-500  min-h-icon max-h-icon  bg-white flex flex-row  text-black flex-row min-w-iconM tablet:min-w-iconT laptop:min-w-iconL   place-content-center align-center items-center justify-center'>
           <div className='mx-10 absolute left-0'>
-            <Desktop>
-              <LocalOfferIcon sx={{ fontSize: 150, color: 'black'}} />
-            </Desktop>
-            <Tablet>
-              <LocalOfferIcon sx={{ fontSize: 125, color: 'black'}} />
-            </Tablet>
-            <Mobile>
-              <LocalOfferIcon sx={{ fontSize: 100, color: 'black'}} />
-            </Mobile>
+              <MdLocalOffer className='text-7xl tablet:text-9xl' />
           </div>
             <span className='text-black absolute left-36 tablet:left-48 laptop:left-56'>{constants.jobOffersNumber}</span>
           </div>
@@ -66,29 +31,13 @@ const Icons: NextPage = () => {
         <div className='flex flex-col tablet:flex-row gap-2'>
           <div className='relative border-4 border-rose-500  min-h-icon max-h-icon  bg-white flex flex-row  text-black flex-row min-w-iconM tablet:min-w-iconT laptop:min-w-iconL   place-content-center align-center items-center justify-center'>
           <div className='mx-10 absolute left-0'>
-            <Desktop>
-              <BusinessCenterIcon sx={{ fontSize: 150, color: 'black'}} />
-            </Desktop>
-            <Tablet>
-              <BusinessCenterIcon sx={{ fontSize: 125, color: 'black'}} />
-            </Tablet>
-            <Mobile>
-              <BusinessCenterIcon sx={{ fontSize: 100, color: 'black'}} />
-            </Mobile>
+              <MdBusinessCenter  className='text-7xl tablet:text-9xl'/>
           </div>
           <span className='text-black absolute left-36 tablet:left-48 laptop:left-56'>{constants.hiresNumbers}</span>
           </div>
             <div className='relative border-4 border-rose-500  min-h-icon max-h-icon  bg-white flex flex-row  text-black flex-row min-w-iconM tablet:min-w-iconT laptop:min-w-iconL   place-content-center align-center items-center justify-center'>
             <div className='mx-10 absolute left-0'>
-            <Desktop>
-              <PaidIcon sx={{ fontSize: 150, color: 'black'}} />
-            </Desktop>
-            <Tablet>
-              <PaidIcon sx={{ fontSize: 125, color: 'black'}} />
-            </Tablet>
-            <Mobile>
-              <PaidIcon sx={{ fontSize: 100, color: 'black'}} />
-            </Mobile>
+              <MdPaid className='text-7xl tablet:text-9xl' />
           </div>
               <span className='text-black absolute left-36 tablet:left-48 laptop:left-56'>{constants.estimationsSentNumber}</span>
             </div>

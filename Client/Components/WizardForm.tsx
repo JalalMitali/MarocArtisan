@@ -5,7 +5,10 @@ import { ArtisanContext } from "../../pages/index";
 import { jobType } from '../../Utils/SelectData'
 import FormSelect from "./FormSelect";
 import { styles } from "./FormStyles";
-import Select from 'react-select'
+import dynamic from "next/dynamic";
+const Select = dynamic(() =>
+  import("react-select"), { ssr: false });
+ 
 import { ArtisanOpenings } from '../../Utils/SelectData'
 
 type FormValues = {
