@@ -15,6 +15,7 @@ const ARConstants = {
     AppleStore: 'APP STORE',
     clientsNumber: '5000 عميل',
     hireRate: '75٪ معدل تأجير',
+    city: "المدينة",
     carouselArtisan: 'كن أحد شركائنا الموثوق بهم للحصول على وظائف بسهولة وكسب المزيد',
 }
 export default ARConstants;

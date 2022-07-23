@@ -16,5 +16,6 @@ const Constants = {
     clientsNumber: '5000 CLIENTS',
     hireRate: '75% HIRE RATE',
     carouselArtisan: 'Become One Of Our Trusted Partners to Get Hired Easily and Earn More',
+    city: "City",
 }
 export default Constants;

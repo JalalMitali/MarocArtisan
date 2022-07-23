@@ -15,6 +15,7 @@ const FRConstants = {
     AppleStore: 'APP STORE',
     clientsNumber: '5000 CLIENTS',
     hireRate: "75% DE TAUX D'EMBAUCHE",
+    city: "Ville",
     carouselArtisan: "Devenez l'un de nos partenaires de confiance pour être embauché facilement et gagner plus",
 }
 export default FRConstants;

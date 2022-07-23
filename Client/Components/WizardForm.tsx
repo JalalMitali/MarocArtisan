@@ -10,6 +10,7 @@ const Select = dynamic(() =>
   import("react-select"), { ssr: false });
  
 import { ArtisanOpenings } from '../../Utils/SelectData'
+import { GroupBase, StylesConfig } from "react-select";
 
 type FormValues = {
   JobType: string;
@@ -23,7 +24,7 @@ function InputSelect(props: UseControllerProps<FormValues>) {
   } = useController(props);
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} styles={styles} options={ArtisanOpenings} />
+      <Select onChange={onChange} onBlur={onBlur} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={ArtisanOpenings} />
     </div>
   );
 }

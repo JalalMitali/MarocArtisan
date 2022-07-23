@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Select = dynamic(() =>
   import("react-select"), { ssr: false });
  
-import { ArtisanOpenings, ArtisanOpeningsAR, ArtisanOpeningsFR } from '../../Utils/SelectData'
+import { VilleSelect, VilleSelectAR, VilleSelectFR } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
@@ -15,19 +15,20 @@ import { useRouter } from 'next/router'
 import { styles } from '../../Client/Components/FormStyles';
 import { useContext } from 'react';
 import { ArtisanContext } from '../index';
+import { GroupBase, StylesConfig } from 'react-select';
 
 type FormValues = {
   JobType: string;
 };
 var constants: typeof Constants;
-var artisanOpenings: typeof ArtisanOpenings;
+var villeSelect: typeof VilleSelect;
 
-const setAll = (iconstants: typeof Constants, artisans: typeof ArtisanOpenings) => {
+const setAll = (iconstants: typeof Constants, artisans: typeof VilleSelect) => {
   constants = iconstants;
-  artisanOpenings = artisans;
+  villeSelect = artisans;
 }
 
-function InputSelect(props: UseControllerProps<FormValues>) {
+function MyVilleSelect(props: UseControllerProps<FormValues>) {
   const {
     field: { onChange, onBlur, name, value, ref },
     fieldState: { invalid, isTouched, isDirty },
@@ -35,7 +36,7 @@ function InputSelect(props: UseControllerProps<FormValues>) {
   } = useController(props);
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} styles={styles} options={artisanOpenings} />
+      <Select onChange={onChange} onBlur={onBlur} placeholder={constants.city} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={villeSelect} />
     </div>
   );
 }
@@ -53,7 +54,7 @@ const Carpenter: NextPage = () => {
     mode: "onChange"
   });
   let router = useRouter();
-  router.locale == "en" ? setAll(Constants, ArtisanOpenings): router.locale == "fr" ? setAll(FRConstants, ArtisanOpeningsFR) : router.locale == "ar" ? setAll(ARConstants, ArtisanOpeningsAR) : setAll(Constants, ArtisanOpenings);
+  router.locale == "en" ? setAll(Constants, VilleSelect): router.locale == "fr" ? setAll(FRConstants, VilleSelectFR) : router.locale == "ar" ? setAll(ARConstants, VilleSelectAR) : setAll(Constants, VilleSelect);
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
@@ -64,7 +65,7 @@ const Carpenter: NextPage = () => {
       <main className='bg-slider2 flex flex-col min-h-screen min-w-screen'>
       <form onSubmit={handleSubmit(onSubmit) } className="m-auto ">
         <div className='text-2xl tablet:text-3xl laptop:text-6xl'>
-          <InputSelect control={control} name="JobType" rules={{ required: true }} />
+          <MyVilleSelect control={control} name="JobType" rules={{ required: true }} />
         </div>
         <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
       </form>
