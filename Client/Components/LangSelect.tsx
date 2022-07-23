@@ -5,10 +5,11 @@ import { Options } from '../../Utils/SelectData'
 const Select = dynamic(() =>
   import("react-select"), { ssr: false });
 
-export default (props: {styles: any, router: any, langStyles: string, selectOptions: readonly Options[] }) => (
+export default (props: {lang: any, styles: any, router: any, langStyles: string, selectOptions: readonly Options[] }) => (
   <Select
     instanceId="lang-select"
-    defaultValue={props.selectOptions[0]}
+    placeholder={props.lang == "en" ? "English" : props.lang == "fr" ? "Français" : props.lang == "ar" ? "العربية" : "Lang لغة " }
+    defaultValue={props.lang == "en" ? "English" : props.lang == "fr" ? "Français" : props.lang == "ar" ? "العربية" : "Lang لغة " }
     styles={props.styles}
     options={props.selectOptions}
     className={props.langStyles}
