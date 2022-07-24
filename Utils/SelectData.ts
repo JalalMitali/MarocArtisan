@@ -99,6 +99,24 @@ export interface Options {
     { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
   ];
 
+
+  export const FezDistrictSelectEN: readonly Options[] = [
+    { value: 'plumber', label: 'Electrican', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Plumber', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+  export const FezDistrictSelectFR: readonly Options[] = [
+    { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+  export const FezDistrictSelectAR: readonly Options[] = [
+    { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
+    { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },
+    { value: 'carpenter', label: 'Carpenter', color: '#FF5630', isFixed: true },
+  ];
+
+
   export const jobType: readonly Options[] = [
     { value: 'plumber', label: 'Plumber', color: '#00B8D9', isFixed: true },
     { value: 'electrician', label: 'Electrican', color: '#5243AA', isFixed: true  },

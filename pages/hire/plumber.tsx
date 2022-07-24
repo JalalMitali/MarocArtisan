@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Select = dynamic(() =>
   import("react-select"), { ssr: false });
  
-import { CitySelect, CitySelectAR, CitySelectFR, Options } from '../../Utils/SelectData'
+import { CitySelect, CitySelectAR, CitySelectFR } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
@@ -17,17 +17,20 @@ import { useContext, useEffect } from 'react';
 import { ArtisanContext } from '../index';
 import { GroupBase, StylesConfig } from 'react-select';
 import Districts from '../../Utils/Districts'
+import Head from 'next/head';
 
 type FormValues = {
   City: string;
   District: string;
 };
 var constants: typeof Constants;
-var districtOptions: readonly Options[];
+var districtOptions: typeof Districts; 
 var citySelect: typeof CitySelect;
-const setAll = (iconstants: typeof Constants, artisans: typeof CitySelect) => {
+var defaultDistrict: typeof Districts;
+var city: string;
+const setAll = (iconstants: typeof Constants, cities: typeof CitySelect) => {
   constants = iconstants;
-  citySelect = artisans;
+  citySelect = cities;
 }
 
 function MyCitySelect(props: UseControllerProps<FormValues>) {
@@ -39,7 +42,7 @@ function MyCitySelect(props: UseControllerProps<FormValues>) {
 
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} placeholder={constants.city} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={citySelect} />
+      <Select onChange={onChange} onBlur={onBlur} value={value} placeholder={constants.city} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={citySelect} />
     </div>
   );
 }
@@ -53,7 +56,7 @@ function MyDistrictSelect(props: UseControllerProps<FormValues>) {
 
   return (
     <div>
-      <Select onChange={onChange} onBlur={onBlur} placeholder={constants.district} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={districtOptions} />
+      <Select onChange={onChange} onBlur={onBlur} value={value} placeholder={constants.district} styles={styles as StylesConfig<unknown, boolean, GroupBase<unknown>>} options={districtOptions} />
     </div>
   );
 }
@@ -66,22 +69,33 @@ const submitted = (router: any, data: any, form: any, setForm: any) => {
 const Plumber: NextPage = () => {
   let router = useRouter();
   router.locale == "en" ? setAll(Constants, CitySelect): router.locale == "fr" ? setAll(FRConstants, CitySelectFR) : router.locale == "ar" ? setAll(ARConstants, CitySelectAR) : setAll(Constants, CitySelect);
-  const { handleSubmit, control, watch } = useForm<FormValues>({
+  const { handleSubmit, control, watch, setValue } = useForm<FormValues>({
     defaultValues: {
       City: "",
       District: ""
     },
     mode: "onChange"
   });
-  const city = watch("City")["value" as any];
+  
   let lang = router.locale!.toUpperCase();
+  city = watch("City")["value" as any];
+  districtOptions = Districts[`${city}${lang}`];
   useEffect(() => {
-    districtOptions = Districts[`${city}${lang}`];
-  }, [city]) 
+    return () => {
+      Districts[`${city}${lang}`] === undefined ? setValue("District", (Districts[`${citySelect[0]["value"]}${lang}`][0])) : setValue("District", (Districts[`${city}${lang}`][0])); 
+ 
+    }
+     }, [city, districtOptions])
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
     <div className={router.locale === "en" ? "font-Coffee" :  router.locale === "ar" ? "font-arFont" : router.locale === "fr" ? "font-Dreams": "font-Coffee"}>
+      <Head>
+        <title>Maroc Artisan | {constants.Hiring}</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="Maroc Artisan #1 Site For Hiring Artisans in Morocco." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <header>
       <Appbar activePage={0}/>
       </header>
@@ -92,7 +106,7 @@ const Plumber: NextPage = () => {
           <MyDistrictSelect control={control} name="District" rules={{ required: true }}  />
         </div>
         
-        <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
+        <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
       </form>
       </main>
       <footer>
