@@ -8,24 +8,27 @@ const Select = dynamic(() =>
   import("react-select"), { ssr: false });
 
 import { ArtisanOpenings, ArtisanOpeningsFR, ArtisanOpeningsAR } from '../../Utils/SelectData'
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm, UseControllerProps, useController } from "react-hook-form";
 import { styles } from './FormStyles'
 import { ArtisanContext } from "../../pages/index";
 import { Options } from '../../Utils/SelectData'
+import Openings from '../../Utils/Openings';
+import DefaultLang from '../../Helper/DefaultLang'
 
 type FormValues = {
   JobType: string;
 };
 
-export const MySelect = (props: {onChange: any, onBlur: any, styles: any, selectOptions: readonly Options[] }) => (
+export const MySelect = (props: {value: any, name:any, onChange: any, onBlur: any, styles: any, selectOptions: readonly Options[] }) => (
   <Select
     instanceId="lang-select"
-    defaultValue={props.selectOptions[0]}
     styles={props.styles}
     options={props.selectOptions}
     onChange={props.onChange}
     onBlur={props.onBlur}
+    value={props.value}
+    name={props.name}
   />
 );
 
@@ -37,10 +40,11 @@ function InputSelect(props: UseControllerProps<FormValues>) {
   } = useController(props);
   return (
     <div>
-      <MySelect onChange={onChange} onBlur={onBlur} styles={styles} selectOptions={artisanOpenings}  />
+      <MySelect onChange={onChange} name={name} value={value} onBlur={onBlur} styles={styles} selectOptions={artisanOpenings}  />
     </div>
   );
 }
+var selected: string;
 var constants: typeof Constants;
 var artisanOpenings: typeof ArtisanOpenings;
 
@@ -49,11 +53,11 @@ const setAll = (iconstants: typeof Constants, artisans: typeof ArtisanOpenings) 
   artisanOpenings = artisans;
 }
 const submitted = (router: any, data: any, form: any, setForm: any) => {
-  setForm(`jobType: ${data.JobType["value" as unknown as number]}`);
+  setForm(`JobType: ${data.JobType["value" as unknown as number]}`);
   router.push(router.push(`/hire/${data.JobType["value" as unknown as number]}`, `/hire/${data.JobType["value" as unknown as number]}`, { shallow: true }));
 }
 const Carousel: NextPage = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       JobType: "",
     },
@@ -61,10 +65,15 @@ const Carousel: NextPage = () => {
   });
   let router = useRouter();
   router.locale == "en" ? setAll(Constants, ArtisanOpenings): router.locale == "fr" ? setAll(FRConstants, ArtisanOpeningsFR) : router.locale == "ar" ? setAll(ARConstants, ArtisanOpeningsAR) : setAll(ARConstants, ArtisanOpeningsAR);
-    const options = { delay: 5000 }
+    //const options = { delay: 5000 }
     const { form, setForm } = useContext(ArtisanContext)
+    const lang = router.locale;
     const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
-  
+    selected = watch("JobType")["value" as unknown as number];
+    const found = artisanOpenings.find(e => e.value === selected);
+    useEffect(() => {
+        found === undefined ? artisanOpenings[0] : setValue("JobType", found as any);
+    }, [lang])
   return (
     <div className='relative'>
       <div className="bg-slider2 overflow-hidden">

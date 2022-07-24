@@ -26,7 +26,6 @@ type FormValues = {
 var constants: typeof Constants;
 var districtOptions: typeof Districts; 
 var citySelect: typeof CitySelect;
-var defaultDistrict: typeof Districts;
 var city: string;
 const setAll = (iconstants: typeof Constants, cities: typeof CitySelect) => {
   constants = iconstants;
