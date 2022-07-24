@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Select = dynamic(() =>
   import("react-select"), { ssr: false });
  
-import { CitySelect, CitySelectAR, CitySelectFR } from '../../Utils/SelectData'
+import { CitySelect, CitySelectAR, CitySelectFR, Options } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
@@ -24,9 +24,10 @@ type FormValues = {
   District: string;
 };
 var constants: typeof Constants;
-var districtOptions: typeof Districts; 
+var districtOptions: readonly Options[]; 
 var citySelect: typeof CitySelect;
 var city: string;
+var district: string;
 const setAll = (iconstants: typeof Constants, cities: typeof CitySelect) => {
   constants = iconstants;
   citySelect = cities;
@@ -78,13 +79,25 @@ const Carpenter: NextPage = () => {
   
   let lang = router.locale!.toUpperCase();
   city = watch("City")["value" as any];
-  districtOptions = Districts[`${city}${lang}`];
+  district = watch("District")["value" as any];
+  districtOptions =  Districts[`${city}${lang}`] as readonly Options[];
   useEffect(() => {
     return () => {
       Districts[`${city}${lang}`] === undefined ? setValue("District", (Districts[`${citySelect[0]["value"]}${lang}`][0])) : setValue("District", (Districts[`${city}${lang}`][0])); 
  
     }
      }, [city, districtOptions])
+  useEffect(() => {
+    if(city === undefined) {
+      return
+    } 
+    else {
+      const cityFound = citySelect.find(e => e.value === city);
+      const districtFound = districtOptions.find((e: { value: string; }) => e.value === district);
+      cityFound === undefined ? null: setValue("City", cityFound as any);
+      districtFound === undefined ? null : setValue("District", districtFound as any);
+    }
+  }, [lang])
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
