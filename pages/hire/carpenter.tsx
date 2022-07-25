@@ -82,22 +82,20 @@ const Carpenter: NextPage = () => {
   district = watch("District")["value" as any];
   districtOptions =  Districts[`${city}${lang}`] as readonly Options[];
   useEffect(() => {
+    if(city === undefined || districtOptions === undefined) {
+      return () => {
+        Districts[`${city}${lang}`] === undefined ? null : setValue("District", (Districts[`${city}${lang}`][0])); 
+        
+      }
+    }
     return () => {
-      Districts[`${city}${lang}`] === undefined ? setValue("District", (Districts[`${citySelect[0]["value"]}${lang}`][0])) : setValue("District", (Districts[`${city}${lang}`][0])); 
- 
+        Districts[`${city}${lang}`] === undefined ? setValue("District", (Districts[`${citySelect[0]["value"]}${lang}`][0])) : setValue("District", (Districts[`${city}${lang}`][0])); 
+        const cityFound = citySelect.find(e => e.value === city);
+        const districtFound = districtOptions.find((e: { value: string; }) => e.value === district);
+        cityFound === undefined ? null: setValue("City", cityFound as any);
+        districtFound === undefined ? null : setValue("District", districtFound as any);
     }
-     }, [city, districtOptions])
-  useEffect(() => {
-    if(city === undefined) {
-      return
-    } 
-    else {
-      const cityFound = citySelect.find(e => e.value === city);
-      const districtFound = districtOptions.find((e: { value: string; }) => e.value === district);
-      cityFound === undefined ? null: setValue("City", cityFound as any);
-      districtFound === undefined ? null : setValue("District", districtFound as any);
-    }
-  }, [lang])
+     }, [city, districtOptions, lang]);
   const { form, setForm } = useContext(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
