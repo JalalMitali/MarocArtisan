@@ -21,7 +21,7 @@ const FRConstants = {
     fileUpload: "glisser-déposer ou cliquer pour sélectionner des images ou des vidéos (facultatif)".toUpperCase(),
     carouselArtisan: "Devenez l'un de nos partenaires de confiance pour être embauché facilement et gagner plus",
     removeFile: "cliquer sur le fichier pour le supprimer".toUpperCase(),
-    deleteFiles: "",
-    uploadFiles: "",
+    deleteFiles: "supprimer tout".toUpperCase(),
+    uploadFiles: "télécharger tout".toUpperCase(),
 }
 export default FRConstants;

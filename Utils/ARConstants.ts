@@ -21,7 +21,7 @@ const ARConstants = {
     fileUpload: "قم بالسحب والإفلات أو النقر لتحميل الصور / مقاطع الفيديو (اختياري)",
     getQuote: "عرض الأسعار",
     removeFile: "انقر فوق الملف لحذفه",
-    deleteFiles: "",
-    uploadFiles: "UPLOAD ALL",
+    deleteFiles: "حذف الكل",
+    uploadFiles: "تحميل الكل",
 }
 export default ARConstants;
