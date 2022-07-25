@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
+import { MdDelete, MdVerified } from 'react-icons/md';
 import ARConstants from '../../Utils/ARConstants';
 import Constants from '../../Utils/Constants';
 import FRConstants from '../../Utils/FRConstants';
@@ -90,9 +91,9 @@ export default function UploadPreview(props) {
       <aside style={thumbsContainer}>
         {thumbs}
       </aside>
-      { files.length > 0 && <div className='min-w-screen grid grid-rows-12'>
-      <button className='text-white bg-red-600 col-span-6' onClick={() => setFiles([])}>{constants.deleteFiles}</button>
-      <button className='text-white bg-green-600 col-span-6' onClick={() => console.log(JSON.stringify(files))}>{constants.uploadFiles}</button>
+      { files.length > 0 && <div className='min-w-screen flex flex-row min-w-screen grid grid-cols-12'>
+      <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => setFiles([])}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
+      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => console.log(JSON.stringify(files))}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
      </div> }
     </section>
   );
