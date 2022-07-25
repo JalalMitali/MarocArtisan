@@ -18,6 +18,10 @@ const Constants = {
     carouselArtisan: 'Become One Of Our Trusted Partners to Get Hired Easily and Earn More',
     city: "City",
     district: "District",
-    getQuote: "GET A QUOTE"
+    getQuote: "GET A QUOTE",
+    fileUpload: "Drag & Drop Or Click To Upload Images / Videos ( Optional )",
+    removeFile: "click on file to delete",
+    deleteFiles: "DELETE ALL",
+    uploadFiles: "UPLOAD ALL",
 }
 export default Constants;

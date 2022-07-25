@@ -18,6 +18,10 @@ const ARConstants = {
     city: "المدينة",
     carouselArtisan: 'كن أحد شركائنا الموثوق بهم للحصول على وظائف بسهولة وكسب المزيد',
     district: "الحي",
+    fileUpload: "قم بالسحب والإفلات أو النقر لتحميل الصور / مقاطع الفيديو (اختياري)",
     getQuote: "عرض الأسعار",
+    removeFile: "انقر فوق الملف لحذفه",
+    deleteFiles: "",
+    uploadFiles: "UPLOAD ALL",
 }
 export default ARConstants;

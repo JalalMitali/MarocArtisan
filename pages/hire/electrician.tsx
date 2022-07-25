@@ -1,24 +1,24 @@
 import type { NextPage } from 'next'
 import Appbar from '../../Client/Components/Appbar'
 import Footer from '../../Client/Components/Footer'
-import * as React from "react";
+import * as React from "react"
 import { useForm, useController, UseControllerProps } from "react-hook-form";
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 const Select = dynamic(() =>
-  import("react-select"), { ssr: false });
- 
+  import("react-select"), { ssr: false })
+
 import { CitySelect, CitySelectAR, CitySelectFR, Options } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
 import ARConstants from '../../Utils/ARConstants'
 import { useRouter } from 'next/router'
-import { styles } from '../../Client/Components/FormStyles';
-import { useContext, useEffect } from 'react';
-import { ArtisanContext } from '../index';
-import { GroupBase, StylesConfig } from 'react-select';
+import { styles } from '../../Client/Components/FormStyles'
+import { useContext, useEffect, useState } from 'react'
+import { ArtisanContext } from '../index'
+import { GroupBase, StylesConfig } from 'react-select'
 import Districts from '../../Utils/Districts'
 import Head from 'next/head';
-
+import UploadPreview from '../../Client/JS/UploadPreview'
 type FormValues = {
   City: string;
   District: string;
@@ -109,11 +109,12 @@ const Electrician: NextPage = () => {
       <header>
       <Appbar activePage={0}/>
       </header>
-      <main className='bg-slider2 flex flex-col min-h-screen min-w-screen'>
+      <main className='overflow-hidden  bg-slider2 flex flex-col min-h-screen min-w-screen'>
       <form onSubmit={handleSubmit(onSubmit) } className="m-auto ">
         <div className='text-2xl tablet:text-3xl laptop:text-6xl'>
           <MyCitySelect control={control} name="City" rules={{ required: true }} />
           <MyDistrictSelect control={control} name="District" rules={{ required: true }}  />
+          <UploadPreview />
         </div>
         
         <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
