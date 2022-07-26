@@ -8,13 +8,11 @@ const Select = dynamic(() =>
   import("react-select"), { ssr: false });
 
 import { ArtisanOpenings, ArtisanOpeningsFR, ArtisanOpeningsAR } from '../../Utils/SelectData'
-import { useContext, useEffect } from "react";
 import { useForm, UseControllerProps, useController } from "react-hook-form";
 import { styles } from './FormStyles'
-import { ArtisanContext } from "../../pages/index";
+import { ArtisanContext } from "../../pages/_app";
+import { useContext, useEffect } from "react";
 import { Options } from '../../Utils/SelectData'
-import Openings from '../../Utils/Openings';
-import DefaultLang from '../../Helper/DefaultLang'
 
 type FormValues = {
   JobType: string;
@@ -52,8 +50,7 @@ const setAll = (iconstants: typeof Constants, artisans: typeof ArtisanOpenings) 
   constants = iconstants;
   artisanOpenings = artisans;
 }
-const submitted = (router: any, data: any, form: any, setForm: any) => {
-  setForm(`JobType: ${data.JobType["value" as unknown as number]}`);
+const submitted = (router: any, data: any) => {
   router.push(router.push(`/hire/${data.JobType["value" as unknown as number]}`, `/hire/${data.JobType["value" as unknown as number]}`, { shallow: true }));
 }
 const Carousel: NextPage = () => {
@@ -66,9 +63,8 @@ const Carousel: NextPage = () => {
   let router = useRouter();
   router.locale == "en" ? setAll(Constants, ArtisanOpenings): router.locale == "fr" ? setAll(FRConstants, ArtisanOpeningsFR) : router.locale == "ar" ? setAll(ARConstants, ArtisanOpeningsAR) : setAll(ARConstants, ArtisanOpeningsAR);
     //const options = { delay: 5000 }
-    const { form, setForm } = useContext(ArtisanContext)
     const lang = router.locale;
-    const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
+    const onSubmit = (data: FormValues) => submitted(router, data);
     selected = watch("JobType")["value" as unknown as number];
     const found = artisanOpenings.find(e => e.value === selected);
     useEffect(() => {
@@ -88,7 +84,7 @@ const Carousel: NextPage = () => {
                         <div className='my-10 text-2xl tablet:text-3xl laptop:text-6xl'>
                         <InputSelect control={control} name="JobType" rules={{ required: true }} />
                         </div>
-                        <input value={constants.getQuote} type="submit" className='bg-rose-600 min-w-screen border-4 border-white rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
+                        <input value={constants.startLogin} type="submit" className='bg-rose-600 min-w-screen border-4 border-white rounded-full bg-black text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
                       </form>
                     </div>
                   </div>

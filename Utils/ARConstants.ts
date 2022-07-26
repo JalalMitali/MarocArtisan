@@ -23,5 +23,10 @@ const ARConstants = {
     removeFile: "انقر فوق الملف لحذفه",
     deleteFiles: "حذف الكل",
     uploadFiles: "تحميل الكل",
+    startLogin: "ربط جوجل",
+    phone: "رقم الهاتف 06",
+    verify: "التحقق",
+    otp: "رمز التحقق",
+    reset: "تغيير الرقم",
 }
 export default ARConstants;

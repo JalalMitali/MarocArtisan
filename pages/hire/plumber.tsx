@@ -19,6 +19,7 @@ import { GroupBase, StylesConfig } from 'react-select'
 import Districts from '../../Utils/Districts'
 import Head from 'next/head';
 import UploadPreview from '../../Client/JS/UploadPreview'
+import { GoogleSign } from '../../Server/Auth/FirebaseAuth'
 type FormValues = {
   City: string;
   District: string;
@@ -82,6 +83,9 @@ const Plumber: NextPage = () => {
   district = watch("District")["value" as any];
   districtOptions =  Districts[`${city}${lang}`] as readonly Options[];
   useEffect(() => {
+    GoogleSign(router.locale)
+  })
+  useEffect(() => {
     if(city === undefined || districtOptions === undefined) {
       return () => {
         Districts[`${city}${lang}`] === undefined ? null : setValue("District", (Districts[`${city}${lang}`][0])); 
@@ -96,7 +100,7 @@ const Plumber: NextPage = () => {
         districtFound === undefined ? null : setValue("District", districtFound as any);
     }
      }, [city, districtOptions, lang]);
-  const { form, setForm } = useContext(ArtisanContext)
+  const { form, setForm } = t(ArtisanContext)
   const onSubmit = (data: FormValues) => submitted(router, data, form, setForm);
   return (
     <div className={router.locale === "en" ? "font-Coffee" :  router.locale === "ar" ? "font-arFont" : router.locale === "fr" ? "font-Dreams": "font-Coffee"}>
@@ -114,9 +118,8 @@ const Plumber: NextPage = () => {
         <div className='text-2xl tablet:text-3xl laptop:text-6xl'>
           <MyCitySelect control={control} name="City" rules={{ required: true }} />
           <MyDistrictSelect control={control} name="District" rules={{ required: true }}  />
-          <UploadPreview />
+          <UploadPreview storageFolder="Client/Carpenter" />
         </div>
-        
         <input value={constants.startHiring} type="submit" className='min-w-screen border-4 border-white bg-rose-500 rounded-full text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
       </form>
       </main>
@@ -126,5 +129,6 @@ const Plumber: NextPage = () => {
       </div>
   )
 }
+
 
 export default Plumber

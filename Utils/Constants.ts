@@ -23,5 +23,10 @@ const Constants = {
     removeFile: "click on file to delete",
     deleteFiles: "DELETE ALL",
     uploadFiles: "UPLOAD ALL",
+    startLogin: "google login".toUpperCase(),
+    phone: "phone 06".toUpperCase(),
+    verify: "Verify".toUpperCase(),
+    otp: "otp pin".toUpperCase(),
+    reset: "edit number".toUpperCase(),
 }
 export default Constants;

@@ -23,5 +23,10 @@ const FRConstants = {
     removeFile: "cliquer sur le fichier pour le supprimer".toUpperCase(),
     deleteFiles: "supprimer tout".toUpperCase(),
     uploadFiles: "télécharger tout".toUpperCase(),
+    startLogin: "connecter google".toUpperCase(),
+    phone: "telephone 06".toUpperCase(),
+    verify: "Vérifier",
+    otp: "SMS CODE",
+    reset: "modifier numero".toUpperCase(),
 }
 export default FRConstants;

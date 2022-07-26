@@ -5,6 +5,7 @@ import { MdDelete, MdVerified } from 'react-icons/md';
 import ARConstants from '../../Utils/ARConstants';
 import Constants from '../../Utils/Constants';
 import FRConstants from '../../Utils/FRConstants';
+import uploadFiles from '../JS/UploadHelper'
 
 const thumbsContainer = {
   display: 'flex',
@@ -83,7 +84,7 @@ export default function UploadPreview(props) {
   }, []);
 
   return (
-    <section className="bg-black text-white min-w text-center text-middle text-lg tablet:text-2xl laptop:text-5xl">
+    <section className={`${router.locale == "fr" ? 'bg-black text-white min-w-screen text-center text-middle text-sm tablet:text-xl laptop:text-4xl' : "bg-black text-white min-w-screen text-center text-middle text-lg tablet:text-2xl laptop:text-5xl"}`}>
       <div {...getRootProps({className: 'dropzone'})}>
         <input {...getInputProps()} />
         <p>{constants.fileUpload}</p>
@@ -93,7 +94,7 @@ export default function UploadPreview(props) {
       </aside>
       { files.length > 0 && <div className='min-w-screen flex flex-row min-w-screen grid grid-cols-12'>
       <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => setFiles([])}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
-      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => console.log(JSON.stringify(files))}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
+      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { /*uploadFiles(files, props.storageFolder);*/ props.showForm(true)}}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
      </div> }
     </section>
   );
