@@ -10,8 +10,7 @@ const Select = dynamic(() =>
 import { ArtisanOpenings, ArtisanOpeningsFR, ArtisanOpeningsAR } from '../../Utils/SelectData'
 import { useForm, UseControllerProps, useController } from "react-hook-form";
 import { styles } from './FormStyles'
-import { ArtisanContext } from "../../pages/_app";
-import { useContext, useEffect } from "react";
+import {  useEffect } from "react";
 import { Options } from '../../Utils/SelectData'
 
 type FormValues = {

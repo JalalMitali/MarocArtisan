@@ -28,5 +28,7 @@ const ARConstants = {
     verify: "التحقق",
     otp: "رمز التحقق",
     reset: "تغيير الرقم",
+    PhoneNotValid: "رقم الهاتف غير صالح",
+    OTPNotValid: "الرمز غير صحيح",
 }
 export default ARConstants;

@@ -28,5 +28,7 @@ const Constants = {
     verify: "Verify".toUpperCase(),
     otp: "otp pin".toUpperCase(),
     reset: "edit number".toUpperCase(),
+    PhoneNotValid: "Phone Not Valid",
+    OTPNotValid: "Wrong OTP",
 }
 export default Constants;

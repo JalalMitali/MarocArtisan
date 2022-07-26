@@ -1,33 +1,34 @@
-import { firebaseApp } from '../Secure/Firebase'
-import { getAuth } from 'firebase/auth'
-
-const auth = getAuth(firebaseApp);
+import { auth } from '../Secure/Firebase'
+import { RecaptchaVerifier } from 'firebase/auth'
 
 export function SMSRequest(lang, phoneNumber) {
   auth.languageCode = lang;
   let confirm;
+  let error = 0;
   const appVerifier = window.recaptchaVerifier;
   const phone = `+212${phoneNumber}`;
   auth.languageCode = lang;
-  let solved = false;
   window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
     'size': 'invisible',
     'callback': (response) => {
-      solved = true;
-    }
-  }, auth);
-  if(solved) {
-    return signInWithPhoneNumber(auth, phone, appVerifier)
+      return signInWithPhoneNumber(auth, phone, appVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
           return confirm = confirmationResult
+        }).catch((err) => {
+          error = err;
         });
-  }
+    }
+  }, auth);
+  return [confirm, error];
   }
   export function SMSVerify(code, confirmationResult) {
   let data = [null, null];
-  return confirmationResult.confirm(code).then((result) => {
+  confirmationResult.confirm(code).then((result) => {
     const user = result.user;
-    return data = [user, 0];
+    data = [user, 0];
+  }).catch((err) => {
+    data = ["", err]
   });
+  return data;
 }

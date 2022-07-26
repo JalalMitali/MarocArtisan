@@ -1,5 +1,5 @@
 import { ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../Server/Video/FirebaseStorage";
+import { storage } from "../../Server/Secure/Firebase";
 
 export default function uploadFile(files, folder) {
     files.forEach(file => {

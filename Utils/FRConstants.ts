@@ -28,5 +28,7 @@ const FRConstants = {
     verify: "Vérifier",
     otp: "SMS CODE",
     reset: "modifier numero".toUpperCase(),
+    PhoneNotValid: "Numero non Valide".toUpperCase(),
+    OTPNotValid: "Code Invalide ",
 }
 export default FRConstants;
