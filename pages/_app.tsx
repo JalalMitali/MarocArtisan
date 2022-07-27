@@ -6,10 +6,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState("");
   const [number, setNumber] = useState("");
   const [code, setCode] = useState("");
+  const [loading, setLoading] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(0);
   const [data, setData] = useState([]);
   const [loginError, setLoginError] = useState(0);
-  return (<ArtisanContext.Provider value={{user, setUser, number, setNumber, confirmationResult, setConfirmationResult,loginError, setLoginError, code, setCode, data, setData}}>
+  return (<ArtisanContext.Provider value={{user, setUser, number, setNumber, loading, setLoading, confirmationResult, setConfirmationResult,loginError, setLoginError, code, setCode, data, setData}}>
     <Component {...pageProps} /></ArtisanContext.Provider>);
 }
 

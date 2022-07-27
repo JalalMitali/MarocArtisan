@@ -5,7 +5,8 @@ import { MdDelete, MdVerified } from 'react-icons/md';
 import ARConstants from '../../Utils/ARConstants';
 import Constants from '../../Utils/Constants';
 import FRConstants from '../../Utils/FRConstants';
-import uploadFiles from '../JS/UploadHelper'
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../Server/Secure/Firebase";
 
 const thumbsContainer = {
   display: 'flex',
@@ -77,7 +78,43 @@ export default function UploadPreview(props) {
       </div>
     </div>
   ));
-
+  const [progress, setProgress] = useState(0);
+  const [fileId, setFileId] = useState(0);
+  const [error, setError] = useState("");
+  const [uris, setUris] = useState([]);
+  const uploadFiles = () => {
+    for(let i = 0; i < files.length; i++){
+      const file = files[i];
+      setFileId(i + 1);
+      const storageRef = ref(storage, `${props.storageFolder}/${file.name}${+new Date}`)
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on('state_changed',
+      (snapshot) => {
+        setProgress(((snapshot.bytesTransferred / snapshot.totalBytes) * 100) );
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        //reject(error);
+        setError(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          //resolve(downloadURL);
+          setUris(uris.push(downloadURL));
+          console.log('Files available at', uris);
+        });
+      }
+    );
+}
+  }
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
@@ -92,9 +129,11 @@ export default function UploadPreview(props) {
       <aside style={thumbsContainer}>
         {thumbs}
       </aside>
+      { progress > 0 ? <div className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:text-3xl laptop:text-5xl'>{`${constants.uploadingFile}(${fileId}) : ${parseInt(progress)} %`}</div> : <div></div> }
+      { error !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{error}</div> : <div></div>  }
       { files.length > 0 && <div className='min-w-screen flex flex-row min-w-screen grid grid-cols-12'>
       <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => setFiles([])}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
-      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { /*uploadFiles(files, props.storageFolder);*/ props.showForm(true)}}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
+      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { uploadFiles(files, props.storageFolder); /*props.showForm(true) */}}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
      </div> }
     </section>
   );

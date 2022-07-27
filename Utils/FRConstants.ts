@@ -30,5 +30,7 @@ const FRConstants = {
     reset: "modifier numero".toUpperCase(),
     PhoneNotValid: "Numero non Valide".toUpperCase(),
     OTPNotValid: "Code Invalide ",
+    loading: "Chargement ...".toUpperCase(),
+    uploadingFile : "Téléchargement du fichier".toUpperCase(),
 }
 export default FRConstants;

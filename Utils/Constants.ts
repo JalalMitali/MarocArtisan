@@ -30,5 +30,7 @@ const Constants = {
     reset: "edit number".toUpperCase(),
     PhoneNotValid: "Phone Not Valid",
     OTPNotValid: "Wrong OTP",
+    loading: "Loading ...",
+    uploadingFile: "Uploading File".toUpperCase(),
 }
 export default Constants;

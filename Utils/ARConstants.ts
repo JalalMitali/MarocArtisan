@@ -30,5 +30,7 @@ const ARConstants = {
     reset: "تغيير الرقم",
     PhoneNotValid: "رقم الهاتف غير صالح",
     OTPNotValid: "الرمز غير صحيح",
+    loading: "المرجو  الإنتظار",
+    uploadingFile: " : تحميل الملف",
 }
 export default ARConstants;

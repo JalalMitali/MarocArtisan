@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth'
+import { EmailAuthProvider, getAuth, signInWithCredential } from 'firebase/auth'
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -15,4 +15,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const storage = getStorage(firebaseApp);
+export const FirebaseTest = () => {
+    const authCredential = EmailAuthProvider.credential("jalalmitalishopping@gmail.com", "Jalal123");
+    signInWithCredential(auth, authCredential);
+}
 export default firebaseApp;
