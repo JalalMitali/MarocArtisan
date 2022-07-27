@@ -76,7 +76,7 @@ const Carpenter: NextPage = () => {
   const [codeValid, setCodeValid] = useState(false);
   const [shouldReset, setReset] = useState(false);
   const [isBadNumber, setBadNumber] = useState(true);
-  const { user, setUser, loginError, setLoginError, loading, setLoading, number, setNumber, confirmationResult, setConfirmationResult, setData, data, code, setCode } = useContext(ArtisanContext)
+  const { user, setUser, loginError, setLoginError, loading, setLoading, number, setNumber, confirmationResult, setConfirmationResult, setData, data, code, setCode, uris } = useContext(ArtisanContext)
   let router = useRouter();
   router.locale == "en" ? setAll(Constants, CitySelect): router.locale == "fr" ? setAll(FRConstants, CitySelectFR) : router.locale == "ar" ? setAll(ARConstants, CitySelectAR) : setAll(Constants, CitySelect);
   const { handleSubmit, control, watch, setValue } = useForm<FormValues>({
@@ -120,7 +120,6 @@ const Carpenter: NextPage = () => {
   }
 
   useEffect(() => {
-    FirebaseTest();
     if(shouldReset === true) {
       setLoading("");
       setLoginError("");
@@ -136,7 +135,14 @@ const Carpenter: NextPage = () => {
         setLoading("");
         setNumberSubmitted(true);
       }).catch((error) => {
-        setLoginError(JSON.stringify(error))
+        if(typeof JSON.stringify(error).split(':')[1] === 'undefined'){
+          setLoginError(constants.error);
+          setBadNumber(true) 
+          setNumberSubmitted(false) 
+          setLoading("");
+          return
+        }
+        setLoginError(JSON.stringify(error).split(':')[1].toString().split(',')[0].toString().slice(1, -1));
         setBadNumber(true) 
         setNumberSubmitted(false) 
         setLoading("");
@@ -154,7 +160,13 @@ const Carpenter: NextPage = () => {
         setLoginError("");
         setLoading("");
       }).catch((error) => {
-        setLoginError(JSON.stringify(error))
+        if(typeof JSON.stringify(error).split(':')[1] === 'undefined'){
+          setLoginError(constants.error);
+          setBadNumber(true) 
+          setNumberSubmitted(false) 
+          setLoading("");
+          return
+        }
         setCodeSubmitted(false);
         setLoading("");
       });
@@ -163,7 +175,8 @@ const Carpenter: NextPage = () => {
       badOTP();
     }
     return () => {
-      ClearAndReset();
+      //ClearAndReset();
+      console.log("reset");
     }
   }, [numberSubmitted, codeSubmitted, shouldReset]);
   useEffect(() => {

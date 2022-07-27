@@ -32,5 +32,6 @@ const ARConstants = {
     OTPNotValid: "الرمز غير صحيح",
     loading: "المرجو  الإنتظار",
     uploadingFile: " : تحميل الملف",
+    error: "خطأ في الخادم"
 }
 export default ARConstants;

@@ -32,5 +32,6 @@ const FRConstants = {
     OTPNotValid: "Code Invalide ",
     loading: "Chargement ...".toUpperCase(),
     uploadingFile : "Téléchargement du fichier".toUpperCase(),
+    error: "erreur du serveur".toUpperCase(),
 }
 export default FRConstants;

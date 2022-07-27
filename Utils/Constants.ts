@@ -32,5 +32,6 @@ const Constants = {
     OTPNotValid: "Wrong OTP",
     loading: "Loading ...",
     uploadingFile: "Uploading File".toUpperCase(),
+    error: "Error".toUpperCase(),
 }
 export default Constants;

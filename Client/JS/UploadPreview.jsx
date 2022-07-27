@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useDropzone} from 'react-dropzone';
 import { MdDelete, MdVerified } from 'react-icons/md';
 import ARConstants from '../../Utils/ARConstants';
@@ -7,6 +7,7 @@ import Constants from '../../Utils/Constants';
 import FRConstants from '../../Utils/FRConstants';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Server/Secure/Firebase";
+import { ArtisanContext } from "../../pages/_app";
 
 const thumbsContainer = {
   display: 'flex',
@@ -42,9 +43,14 @@ const img = {
 var constants;
 
 export default function UploadPreview(props) {
+  const {uris, setUris} = useContext(ArtisanContext);
   const router = useRouter();
   {router.locale === "en" ? constants = Constants : router.locale === "fr" ? constants = FRConstants : router.locale === "ar" ? constants = ARConstants : constants = Constants}
   const [files, setFiles] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [fileId, setFileId] = useState(0);
+  const [error, setError] = useState("");
   const {getRootProps, getInputProps} = useDropzone({
     accept: {
       'image/*': [],
@@ -78,15 +84,16 @@ export default function UploadPreview(props) {
       </div>
     </div>
   ));
-  const [progress, setProgress] = useState(0);
-  const [fileId, setFileId] = useState(0);
-  const [error, setError] = useState("");
-  const [uris, setUris] = useState([]);
   const uploadFiles = () => {
     for(let i = 0; i < files.length; i++){
       const file = files[i];
+      const name = file.name.split('.')[0];
+      const extension = file.name.split('.')[1];
+      if(uploadedFiles.length > 0 && uploadedFiles.contains(name)){
+        return
+      }
       setFileId(i + 1);
-      const storageRef = ref(storage, `${props.storageFolder}/${file.name}${+new Date}`)
+      const storageRef = ref(storage, `${props.storageFolder}/${name}${+new Date}.${extension}`)
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on('state_changed',
       (snapshot) => {
@@ -106,10 +113,10 @@ export default function UploadPreview(props) {
         setError(error);
       },
       () => {
+        setUploadedFiles(uploadedFiles.push(name));
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           //resolve(downloadURL);
           setUris(uris.push(downloadURL));
-          console.log('Files available at', uris);
         });
       }
     );
@@ -132,8 +139,8 @@ export default function UploadPreview(props) {
       { progress > 0 ? <div className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:text-3xl laptop:text-5xl'>{`${constants.uploadingFile}(${fileId}) : ${parseInt(progress)} %`}</div> : <div></div> }
       { error !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{error}</div> : <div></div>  }
       { files.length > 0 && <div className='min-w-screen flex flex-row min-w-screen grid grid-cols-12'>
-      <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => setFiles([])}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
-      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { uploadFiles(files, props.storageFolder); /*props.showForm(true) */}}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
+      <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => { setFiles([]); setUris([]);}}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
+      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { uploadFiles(files, props.storageFolder); props.showForm(true) }}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
      </div> }
     </section>
   );

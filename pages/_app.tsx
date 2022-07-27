@@ -9,8 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(0);
   const [data, setData] = useState([]);
+
+  const [uris, setUris] = useState([]);
   const [loginError, setLoginError] = useState(0);
-  return (<ArtisanContext.Provider value={{user, setUser, number, setNumber, loading, setLoading, confirmationResult, setConfirmationResult,loginError, setLoginError, code, setCode, data, setData}}>
+  return (<ArtisanContext.Provider value={{user, setUser, number, uris, setUris, setNumber, loading, setLoading, confirmationResult, setConfirmationResult,loginError, setLoginError, code, setCode, data, setData}}>
     <Component {...pageProps} /></ArtisanContext.Provider>);
 }
 
