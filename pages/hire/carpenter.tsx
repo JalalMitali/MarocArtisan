@@ -6,7 +6,7 @@ import { useForm, useController, UseControllerProps } from "react-hook-form";
 import dynamic from "next/dynamic"
 const Select = dynamic(() =>
   import("react-select"), { ssr: false })
-
+import { FirebaseError } from '@firebase/util';
 import { CitySelect, CitySelectAR, CitySelectFR, Options } from '../../Utils/SelectData'
 import Constants from '../../Utils/Constants'
 import FRConstants from '../../Utils/FRConstants'
@@ -20,8 +20,8 @@ import Districts from '../../Utils/Districts'
 import Head from 'next/head';
 import UploadPreview from '../../Client/JS/UploadPreview'
 import { SMSRequest, SMSVerify } from '../../Server/Auth/FirebaseAuth';
-import { FirebaseTest } from '../../Server/Secure/Firebase';
-
+import { auth } from '../../Server/Secure/Firebase';
+import { RecaptchaVerifier } from 'firebase/auth'
 type FormValues = {
   City: string;
   District: string;
@@ -68,15 +68,19 @@ const submitted = (router: any, data: any) => {
   router.push(router.push(`/hire/${data.JobType["value" as unknown as number]}`, `/hire/${data.JobType["value" as unknown as number]}`, { shallow: true }));
 }
 
+declare global {
+  interface Window { recaptchaVerifier: RecaptchaVerifier; }
+}
+
+
 const Carpenter: NextPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [numberSubmitted, setNumberSubmitted] = useState(false);
-  const [codeSubmitted, setCodeSubmitted] = useState(false);
   const [isValid, setValid] = useState(false);
   const [codeValid, setCodeValid] = useState(false);
   const [shouldReset, setReset] = useState(false);
   const [isBadNumber, setBadNumber] = useState(true);
-  const { user, setUser, loginError, setLoginError, loading, setLoading, number, setNumber, confirmationResult, setConfirmationResult, setData, data, code, setCode, uris } = useContext(ArtisanContext)
+  const { user, setUser, loginError, setLoginError, loading, setLoading, number, setNumber, confirmationResult, setConfirmationResult, setData, data, code, setCode, uris, codeSubmitted, setCodeSubmitted } = useContext(ArtisanContext)
   let router = useRouter();
   router.locale == "en" ? setAll(Constants, CitySelect): router.locale == "fr" ? setAll(FRConstants, CitySelectFR) : router.locale == "ar" ? setAll(ARConstants, CitySelectAR) : setAll(Constants, CitySelect);
   const { handleSubmit, control, watch, setValue } = useForm<FormValues>({
@@ -120,12 +124,14 @@ const Carpenter: NextPage = () => {
   }
 
   useEffect(() => {
+    alert(JSON.stringify(auth.currentUser));
     if(shouldReset === true) {
       setLoading("");
       setLoginError("");
       setShowForm(true);
       setNumberSubmitted(false);
       setBadNumber(true);
+      
     }
     if(isValid && numberSubmitted) {
       SMSRequest(router.locale, number).then((verify) => {
@@ -134,15 +140,16 @@ const Carpenter: NextPage = () => {
         setLoginError("");
         setLoading("");
         setNumberSubmitted(true);
-      }).catch((error) => {
-        if(typeof JSON.stringify(error).split(':')[1] === 'undefined'){
-          setLoginError(constants.error);
+        return true;
+      }).catch((error: FirebaseError) => {
+        if (error.message) {
+          setLoginError(error.message);
           setBadNumber(true) 
           setNumberSubmitted(false) 
           setLoading("");
-          return
+          return true;
         }
-        setLoginError(JSON.stringify(error).split(':')[1].toString().split(',')[0].toString().slice(1, -1));
+        setLoginError(JSON.stringify(error));
         setBadNumber(true) 
         setNumberSubmitted(false) 
         setLoading("");
@@ -153,22 +160,30 @@ const Carpenter: NextPage = () => {
       setBadNumber(true);
     }
     if(confirmationResult && codeValid && codeSubmitted) {
-      SMSVerify(code, confirmationResult).then((verify: any[]) => {
-        setUser(verify);
-        setCodeSubmitted(true);
-        setShowForm(false);
-        setLoginError("");
-        setLoading("");
-      }).catch((error) => {
-        if(typeof JSON.stringify(error).split(':')[1] === 'undefined'){
-          setLoginError(constants.error);
-          setBadNumber(true) 
-          setNumberSubmitted(false) 
+      SMSVerify(code, confirmationResult).then((verify: any) => {
+        if(verify !== "" && typeof verify !== "undefined"){
+          setShowForm(false);
+          setBadNumber(false);
+          setUser(verify);
           setLoading("");
-          return
+          setLoginError("");
+          setNumberSubmitted(false); //
+          return true;
         }
+        
+      }).catch((error: FirebaseError) => {
+        if (error.message) {
+          setLoginError(error.message); 
+          setCodeSubmitted(false);
+          setLoading("");
+          return true;
+        }
+        setLoginError(JSON.stringify(error));
+        setUser(auth.currentUser);
+        setLoginError(constants.error);
         setCodeSubmitted(false);
         setLoading("");
+        return true;
       });
     }
     if(!codeValid && codeSubmitted){
@@ -176,7 +191,6 @@ const Carpenter: NextPage = () => {
     }
     return () => {
       //ClearAndReset();
-      console.log("reset");
     }
   }, [numberSubmitted, codeSubmitted, shouldReset]);
   useEffect(() => {
@@ -219,18 +233,18 @@ const Carpenter: NextPage = () => {
       <div id='sign-in-button' title='sign-in-button'></div>
       <div className='m-auto'>
         {
-          !showForm ?
+          !showForm ||  (user !== "" && user !== null ) ?
           <div>
             <div className='text-2xl tablet:text-3xl laptop:text-6xl'>
               <MyCitySelect control={control} name="City" rules={{ required: true }} />
               <MyDistrictSelect control={control} name="District" rules={{ required: true }}  />
-              <UploadPreview storageFolder="Client/Carpenter" showForm={setShowForm} />
+              <UploadPreview storageFolder="Client/Carpenter" showForm={showForm} setShowForm={setShowForm} />
             </div>
             <input value={constants.startHiring} type="submit" onSubmit={handleSubmit(onSubmit)} className='min-w-screen border-4 border-white bg-rose-500 rounded-full text-white text-bold text-3xl tablet:text-5xl laptop:text-7xl' />
           </div> : <div></div>
         }
         { 
-         user === "" &&  showForm && isBadNumber ?
+         (user === "" || user === null) &&  showForm && isBadNumber ?
             <div>
                { loginError !== "" && loginError !== 0 ? <div className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:text-3xl laptop:text-5xl'>{loginError}</div> : <div></div>}
                { loading !== 0 && loading !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loading}</div> : <div></div>}
@@ -239,7 +253,7 @@ const Carpenter: NextPage = () => {
           </div>
         : <div></div> 
       }
-      { user === "" && showForm && !isBadNumber && numberSubmitted ?
+      { (user === "" || user === null) && showForm && !isBadNumber && numberSubmitted ?
               <div>
                   { loginError !== "" && loginError !== 0 ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loginError}</div> : <div></div>}
                   { loading !== 0 && loading !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loading}</div> : <div></div>}

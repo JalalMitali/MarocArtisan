@@ -217,7 +217,7 @@ const Plumber: NextPage = () => {
           </div> : <div></div>
         }
         { 
-         user === "" &&  showForm && isBadNumber ?
+         (user === "" || user === null) &&  showForm && isBadNumber ?
             <div>
                { loginError !== "" && loginError !== 0 ? <div className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:text-3xl laptop:text-5xl'>{loginError}</div> : <div></div>}
                { loading !== 0 && loading !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loading}</div> : <div></div>}
@@ -226,7 +226,7 @@ const Plumber: NextPage = () => {
           </div>
         : <div></div> 
       }
-      { user === "" && showForm && !isBadNumber && numberSubmitted ?
+      { (user === "" || user === null) && showForm && !isBadNumber && numberSubmitted ?
               <div>
                   { loginError !== "" && loginError !== 0 ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loginError}</div> : <div></div>}
                   { loading !== 0 && loading !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{loading}</div> : <div></div>}

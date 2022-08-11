@@ -43,7 +43,7 @@ const img = {
 var constants;
 
 export default function UploadPreview(props) {
-  const {uris, setUris} = useContext(ArtisanContext);
+  const {uris, setUris, codeSubmitted, user} = useContext(ArtisanContext);
   const router = useRouter();
   {router.locale === "en" ? constants = Constants : router.locale === "fr" ? constants = FRConstants : router.locale === "ar" ? constants = ARConstants : constants = Constants}
   const [files, setFiles] = useState([]);
@@ -123,6 +123,12 @@ export default function UploadPreview(props) {
 }
   }
   useEffect(() => {
+    if(!props.showForm && codeSubmitted){
+      uploadFiles(files, props.storageFolder); 
+    }
+  })
+  useEffect(() => {
+
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
   }, []);
@@ -140,7 +146,13 @@ export default function UploadPreview(props) {
       { error !== "" ? <div  className='min-w-screen text-white text-red-500 bg-black text-center rounded-full  py-5 text-2xl tablet:3xl laptop:text-5xl'>{error}</div> : <div></div>  }
       { files.length > 0 && <div className='min-w-screen flex flex-row min-w-screen grid grid-cols-12'>
       <button className='p-3 text-white bg-red-600 col-span-6 grid grid-cols-12' onClick={() => { setFiles([]); setUris([]);}}><MdDelete className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.deleteFiles}</div></button>
-      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => { uploadFiles(files, props.storageFolder); props.showForm(true) }}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
+      <button className='p-3 text-white bg-green-600 col-span-6 grid grid-cols-12' onClick={() => {
+         if((user === "" || user === null)) {
+        props.setShowForm(true)
+        return 
+      } 
+      uploadFiles(files, props.storageFolder);
+       }}><MdVerified className='text-red-500 bg-white rounded-full col-span-2 mt-3' /><div className='col-span-10'>{constants.uploadFiles}</div></button>
      </div> }
     </section>
   );

@@ -15,6 +15,7 @@
     "chroma-js": "^2.4.2",
     "firebase": "^9.9.1",
     "firebase-tools": "^11.3.0",
+    "mongodb": "^4.8.1",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
